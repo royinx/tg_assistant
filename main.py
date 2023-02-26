@@ -57,7 +57,6 @@ except:
 
 def check_file_size(file):
     if os.path.getsize(file)>>20 < 50:
-        print(os.path.getsize(file)>>20)
         return [file]
     else:
         cmd = f"split --bytes=50MB {file} {file}_"
