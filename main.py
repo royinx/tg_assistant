@@ -79,7 +79,7 @@ for file_ in files:
     os.remove(file_)
 
 if len(files)>1:
-    print(f"\nPlease run the following command and join the files together.\ncat {file}_* > {file}")
+    tb.send_message(chat_id, f"\nPlease run the following command and join the files together.\ncat {file}_* > {file}")
 
 
 """
