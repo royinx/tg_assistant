@@ -19,10 +19,14 @@ updates = requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/getUpdates").js
 def get_chat_id(all_msg: list):
     chat_ids = {}
     for msg in all_msg:
-        if "my_chat_member" in msg:
-            id = msg["my_chat_member"]["chat"]["id"]
-            channel_name = msg["my_chat_member"]["chat"]["title"]
+        try:
+            del msg["update_id"]
+            msg = list(msg.values())[0]
+            id = msg["chat"]["id"]
+            channel_name = msg["chat"]["title"]
             chat_ids[channel_name] = id
+        except:
+            print("If your chatroom not shown, Please send out sth.\n")
     return chat_ids
 
 # list chatroom
@@ -91,3 +95,7 @@ file_info = tb.get_file(file_id)
 
 file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
 """
+
+# docker run --rm -it -v ${PWD}:/py -w /py python:3.8 bash
+# pip3 install telebot
+# python3 main.py
